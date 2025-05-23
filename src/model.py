@@ -535,7 +535,7 @@ class build_model():
 
         return scores, labels, tss, vattns, tattns
     
-
+    # RTM 프로젝트에서 사용하는 함수
     def inference_unlabeled(self, test_loader):
         """
         Inference for unlabeled WaferDataset:
