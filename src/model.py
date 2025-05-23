@@ -591,7 +591,7 @@ class build_model():
         masks = np.array(masks) 
         
         # 저장
-        folder_path = os.path.join(self.savedir, 'results')
+        folder_path = os.path.join(self.savedir)
         os.makedirs(folder_path, exist_ok=True)
         save_path = os.path.join(folder_path, 'inference_result_with_metadata.h5')
 

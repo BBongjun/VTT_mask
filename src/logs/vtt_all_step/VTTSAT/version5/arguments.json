@@ -1,0 +1,19 @@
+{
+    "train": false,
+    "test": true,
+    "resume": 5,
+    "model": "VTTSAT",
+    "dataname": "vtt_all_step",
+    "window_size": 350,
+    "slide_size": 1,
+    "epochs": 2000,
+    "patience": 100,
+    "loss": "mse",
+    "seed": 72,
+    "use_gpu": true,
+    "gpu": 0,
+    "use_multi_gpu": false,
+    "devices": "0,1",
+    "configure": "config.yaml",
+    "batch_size": 32
+}

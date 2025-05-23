@@ -65,7 +65,7 @@ def load_model(resume: int, logdir: str):
     print('modelpath: ', modelpath)
 
     # loadfile = torch.load(modelpath)
-    loadfile = torch.load(modelpath, weigths_only=False)
+    loadfile = torch.load(modelpath, weights_only=False)
     weights = loadfile['weight']
     start_epoch = loadfile['best_epoch']
     last_lr = loadfile['best_lr']

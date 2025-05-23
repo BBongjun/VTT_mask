@@ -47,11 +47,7 @@ class Model(nn.Module):
                                            )
 
         self.dropout = nn.Dropout(self.ff_dropout)
-
-        # self.transformer_layers = nn.Sequential(*self.transformer_layers)
         self.mlp_head = nn.Linear(self.feature_num*self.embedding_dims, self.feature_num)
-        # self.mlp_head = PreNorm(self.feature_num*self.embedding_dims, nn.Linear(self.feature_num*self.embedding_dims, self.feature_num))
-        # self.mlp_head = nn.Sequential(nn.Linear(self.feature_num*self.embedding_dims, self.feature_num), nn.Sigmoid())
 
 
     def forward(self, x, use_attn=False):

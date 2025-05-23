@@ -9,7 +9,6 @@ import pdb
 import os
 
 from utils.utils import set_seed, log_setting, version_build
-# from data_provider.dataloader import get_dataloader
 from data_provider.waferdataset import get_dataloader
 from model import build_model
 
@@ -69,14 +68,7 @@ def main(sweep_config=None):
 
     data_info = OmegaConf.create(config[args.dataname])
 
-    # # load data
-    # trainloader, validloader, testloader, interloader = get_dataloader(data_name=args.dataname,
-    #                                                                    data_info=data_info,
-    #                                                                    loader_params=config['loader_params'],
-    #                                                                    scale=scale,
-    #                                                                    window_size=model_params.window_size,
-    #                                                                    slide_size=int(model_params.window_size/2),
-    #                                                                    model_type=model_type)
+    # load data
     trainloader, validloader, testloader = get_dataloader(data_info = data_info,
                                                           loader_params = config['loader_params'])        
 
@@ -105,7 +97,6 @@ def main(sweep_config=None):
 
     # test
     if args.test:
-        
         dist = model.inference_unlabeled(testloader)
         # history = model.test(validloader, testloader)
         # for i in range(len(history['precision'])):
@@ -134,14 +125,14 @@ if __name__ == '__main__':
     # data
     # parser.add_argument('--dataname', type=str, required=True, help='data name(SWaT, SMD, SMAP, MSL)',
     #                     choices=['SWaT', 'SMD', 'SMAP', 'MSL'])
-    parser.add_argument('--dataname', type=str, default='vtt_entire', help='waferdataset')
+    parser.add_argument('--dataname', type=str, default='vtt_all_step', help='waferdataset')
     # parser.add_argument('--subdataname', type=str, default=None, help='dataset name')
-    parser.add_argument('--window_size', type=int, default=320, help='window size for data loader')
+    parser.add_argument('--window_size', type=int, default=350, help='window size for data loader')
     parser.add_argument('--slide_size', type=int, default=1, help='overlap ratio for data loader')
 
     # train options
-    parser.add_argument('--epochs', type=int, default=300, help='number of epochs')
-    parser.add_argument('--patience', type=int, default=30, help='early stopping patience')
+    parser.add_argument('--epochs', type=int, default=2000, help='number of epochs')
+    parser.add_argument('--patience', type=int, default=100, help='early stopping patience')
 
     # loss
     parser.add_argument('--loss', type=str, default='mse', choices=['mse', 'mae'],

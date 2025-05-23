@@ -161,10 +161,8 @@ cython_debug/
 
 #
 .idea
-.data
-.src/logs
 .src/checkpoints
-.src/results
-
-data
-src/logs
+src/plots
+src/logs/vtt_all_step/VTTSAT/version5/inference_result_with_metadata.h5
+notebook/vis_test_results_allstep.ipynb
+ignore

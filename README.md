@@ -1,50 +1,40 @@
-# Variable Temporal Transformer(VTT; KBS 2024 research paper)
+# VTT code
 
-**Transformer-based multivariate time series anomaly detection using inter-variable attention mechanism**
-[[paper]](https://www.sciencedirect.com/science/article/pii/S0950705124001424?ref=pdf_download&fr=RR-2&rr=88e52cc379d63158)
+- Code implementation for : [Transformer-based multivariate time series anomaly detection using inter-variable attention mechanism](https://www.sciencedirect.com/science/article/pii/S0950705124001424?ref=pdf_download&fr=RR-2&rr=88e52cc379d63158)
+- 위 코드 기반으로 작성
 
-The primary objective of multivariate time-series anomaly detection is to spot deviations from regular patterns in time-series data compiled concurrently from various sensors and systems. This method finds application across diverse industries, aiding in system maintenance tasks. Capturing temporal dependencies and correlations between variables simultaneously is challenging due to the interconnectedness and mutual influence among variables in multivariate time-series. In this paper, we propose a unique method, the Variable Temporal Transformer (VTT), which utilizes the self-attention mechanism of transformers to effectively understand the temporal dependencies and relationships among variables. This proposed model performs anomaly detection by employing temporal self-attention to model temporal dependencies and variable selfattention to model variable correlations. We use a recently introduced evaluation metric after identifying potential overestimations in the performance of traditional time series anomaly detection methods using the point adjustment protocol evaluation metric. We confirm that our proposed method demonstrates cutting-edge performance through this new metric. Furthermore, we bring forth an anomaly interpretation module to shed light on anomalous data, which we verify using both synthetic and real-world industrial data.
+# Environments (requirements.txt 참고)
+* Python >= 3.9
+* cuda == 11.8
+* Pytorch == 2.7.0+cu118
+* 필수 패키지
+    * omegaconf : config 관리
+    * einops : 텐서 변환 연산자
 
-- We introduce variable attention that considers variable correlations using the transpose matrix of the existing attention input.
-
-- We enable pinpointing anomaly occurrences and estimating causal variables by tracking changes in association weights during inference.
-  
-- The VTT achieves state-of-the-art results, with ablation studies and real-world data confirming the effectiveness and interpretability of our approach.
-
-|![Figure1](image/VTT_architecture.png)|
-|:--:| 
-| *Figure 1. Variable Temporal Transformer architecture.* |
-
-|![Figure2](image/Transformer_layer.png)|
-|:--:| 
-| *Figure 2. The attention module and structure of VTT-SAT and VTT-PAT.* |
+# Data Preparation
+### Notice
+- **dataset_preprocessing.ipynb**로 웨이퍼 데이터(P_FG_60S_1.parquet)와 Score table 데이터(score_results.parquet)를 통해 전처리 진행
+- drystrip_dataset 폴더 안에 웨이퍼 데이터 파일과 score table 데이터 파일을 위치시켜야 함
 
 
-## Citation
-If you find this repo useful, please cite our paper.
+# 코드 실행
+```
+    # For Training & Inference together
+    python main.py --train --test --model VTTSAT
 
 ```
-@article{kang2024transformer,
-  title={Transformer-based multivariate time series anomaly detection using inter-variable attention mechanism},
-  author={Kang, Hyeongwon and Kang, Pilsung},
-  journal={Knowledge-Based Systems},
-  pages={111507},
-  year={2024},
-  publisher={Elsevier}
-}
-```
 
-## Contact
-If you have any question or want to use the code, please contact hyeongwon_kang@korea.ac.kr
-
----
-
+* `vis_test_results_allstep.ipynb`
+    * 시각화를 위한 코드
+    * `2024_06_10_SKT_Market_Top_AI과정.ipynb`의 xai part의 코드 부분 활용
+    
+# 폴더 구조
 ```sh
 .
 ├── LICENSE
-├── README.md
+├── README.md 
 ├── image
-├── notebook
+├── dataset_preprocessing.ipynb # For data preprocessing
 └── src
     ├── data_provider    # data load, preprocessing, dataloader setting
     │   ├── dataloader.py
