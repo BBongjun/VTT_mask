@@ -48,11 +48,12 @@
 # 폴더 구조
 ```sh
 
-├── notebook/                   
-    ├── dataset_preprocessing.ipynb # 원본 웨이퍼 데이터 전처리 jupyter notebook
-    └── vis_test_results.ipynb  # inference 결과를 활용하여 시계열 시각화 및 attetnion difference map 시각화            
+   
 ├── drystrip_dataset/           # 웨이퍼 데이터(.parquet), score table(.parquet) 위치
 ├── data/                       # 전처리된 데이터 저장 경로
+├── notebook/                   
+│   ├── dataset_preprocessing.ipynb # 원본 웨이퍼 데이터 전처리 jupyter notebook
+│   └── vis_test_results.ipynb  # inference 결과를 활용하여 시계열 시각화 및 attetnion difference map 시각화         
 └── src/                        # 메인 코드 디렉토리
     ├── config.yaml             # 실험 하이퍼파라미터 설정
     ├── main.py                 # 메인 코드 (train/test 선택 가능)
@@ -63,6 +64,7 @@
     │ ├── Attention.py          # Variable/Temporal Attention 모듈
     │ ├── Embed.py              
     │ └── Transformer_Enc.py    
+    ├── logs/                   # 모델 파라미터, argument 정보, model hyperparameter 정보 등 저장됨
     ├── models/
     │ ├── VTTPAT.py             
     │ └── VTTSAT.py 
