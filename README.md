@@ -19,7 +19,7 @@
    - `score_results.parquet` (score table)
 
 2. 데이터 전처리:
-   - `dataset_preprocessing.ipynb` 실행 → `data/` 폴더에 저장
+   - `notebook/dataset_preprocessing.ipynb` 실행 → `data/` 폴더에 전처리된 데이터가 저장됨
 
 3. 모델 학습/테스트:
 
@@ -29,7 +29,7 @@
 ```
 
 - config.yaml을 통해, 데이터 파일 경로 설정, hyperparameter 설정 가능
-- 아래 코드 실행 시, logs 폴더 안에 아래 파일들 저장됨
+- 아래 코드 실행 시, `src/logs/` 폴더 안에 아래 파일들 저장됨
     - `*.pth` : best train loss의 model parameter 파일
     - `arguments.json`: argument 설정 정보
     - `model_params.json` : model hyperparameters 정보
@@ -37,21 +37,20 @@
         - 이 데이터를 이용하여, `notebook/vis_test_results.ipynb` 코드로 시각화 진행 가능
 
 # 시각화 코드 
-- `vis_test_results.ipynb`
+- `notebook/vis_test_results.ipynb`
     - 기능
-        - VTT score 계산 
         - inference 결과들에 대해서 시계열 plot 시각화
-        - attention difference map 시각화
-    - 코드 실행을 위해, 모델 test test에 대한 inference 결과 데이터 필요(`inference_result_with_metadata.h5`) 
-    - [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT/tree/main/notebook)의 `2024_06_10_SKT_Market_Top_AI과정.ipynb` 코드 활용하여 작성됨
+        - VTT score 기반 가장 높은/낮은 웨이퍼들을 활용하여 시계열 및 attention difference map 시각화
+    - 코드 실행을 위해, test셋에 대한 inference 결과 데이터 필요(`./logs/*/inference_result_with_metadata.h5`) 
+    - [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT/tree/main/notebook)의 `2024_06_10_SKT_Market_Top_AI과정.ipynb` 코드 기반으로 작성됨
 
     
 # 폴더 구조
 ```sh
 
-├── dataset_preprocessing.ipynb # 원본 웨이퍼 데이터 전처리 jupyter notebook
 ├── notebook/                   
-├── image/                      
+    ├── dataset_preprocessing.ipynb # 원본 웨이퍼 데이터 전처리 jupyter notebook
+    └── vis_test_results.ipynb  # inference 결과를 활용하여 시계열 시각화 및 attetnion difference map 시각화            
 ├── drystrip_dataset/           # 웨이퍼 데이터(.parquet), score table(.parquet) 위치
 ├── data/                       # 전처리된 데이터 저장 경로
 └── src/                        # 메인 코드 디렉토리
