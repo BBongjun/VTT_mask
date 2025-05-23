@@ -115,44 +115,40 @@ if __name__ == '__main__':
     # set arguments
     parser = argparse.ArgumentParser()
 
+    # 모드 선택
     parser.add_argument('--train', action='store_true', help='training model')
     parser.add_argument('--test', action='store_true', help='anomaly scoring')
     parser.add_argument('--resume', type=int, default=None, help='version number to re-train or test model')
     parser.add_argument('--model', type=str, required=True, 
                         choices=['VTTSAT', 'VTTPAT'],
-                        help="model(VTTSAT, VTTPAT)")
+                        help="model (VTTSAT or VTTPAT)")
 
-    # data
-    # parser.add_argument('--dataname', type=str, required=True, help='data name(SWaT, SMD, SMAP, MSL)',
-    #                     choices=['SWaT', 'SMD', 'SMAP', 'MSL'])
-    parser.add_argument('--dataname', type=str, default='vtt_all_step', help='waferdataset')
-    # parser.add_argument('--subdataname', type=str, default=None, help='dataset name')
+    # 데이터 설정
+    parser.add_argument('--dataname', type=str, default='vtt_all_step', help='wafer dataset name')
     parser.add_argument('--window_size', type=int, default=350, help='window size for data loader')
-    parser.add_argument('--slide_size', type=int, default=1, help='overlap ratio for data loader')
+    parser.add_argument('--slide_size', type=int, default=1, help='slide step size for data loader')
 
-    # train options
+    # 학습 설정
     parser.add_argument('--epochs', type=int, default=2000, help='number of epochs')
     parser.add_argument('--patience', type=int, default=100, help='early stopping patience')
-
-    # loss
+    parser.add_argument('--batch_size', type=int, default=32, help='batch size for dataloader')
     parser.add_argument('--loss', type=str, default='mse', choices=['mse', 'mae'],
                         help='select loss function')
 
-    # setting
+    # 실행 환경
     parser.add_argument('--seed', type=int, default=72, help="set randomness")
-    parser.add_argument('--use_gpu', type=bool, default=True, help='use gpu')
-    parser.add_argument('--gpu', type=int, default=0, help='gpu number')
-    parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
-    parser.add_argument('--devices', type=str, default='0,1', help='device ids of multiple gpus')
-    parser.add_argument('--configure', type=str, default='config.yaml', help='configure file load')
-    parser.add_argument('--batch_size', type=int, default=32, help='batch size for dataloader')
+    parser.add_argument('--use_gpu', type=bool, default=True, help='use GPU')
+    parser.add_argument('--gpu', type=int, default=0, help='GPU number')
+    parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple GPUs')
+    parser.add_argument('--devices', type=str, default='0,1', help='device IDs of multiple GPUs')
+    parser.add_argument('--configure', type=str, default='config.yaml', help='YAML configuration file')
 
     args = parser.parse_args()
 
-    # yaml file load
+    # Load YAML configuration
     with open(args.configure) as f:
         config = OmegaConf.load(f)
     
-    # main
+    # 실행
     main()
 

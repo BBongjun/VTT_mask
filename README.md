@@ -1,9 +1,10 @@
 # VTT code
 
-- Code implementation for : [Transformer-based multivariate time series anomaly detection using inter-variable attention mechanism](https://www.sciencedirect.com/science/article/pii/S0950705124001424?ref=pdf_download&fr=RR-2&rr=88e52cc379d63158)
+- Paper : [Transformer-based multivariate time series anomaly detection using inter-variable attention mechanism](https://www.sciencedirect.com/science/article/pii/S0950705124001424?ref=pdf_download&fr=RR-2&rr=88e52cc379d63158)
+- Code repo : [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT)
 - 위 코드 기반으로 작성
 
-# Environments (requirements.txt 참고)
+# Environments (environment.txt 참고)
 * Python >= 3.9
 * cuda == 11.8
 * Pytorch == 2.7.0+cu118
@@ -18,15 +19,17 @@
 
 
 # 코드 실행
+- config.yaml을 통해, hyperparameter 설정 가능
 ```
     # For Training & Inference together
     python main.py --train --test --model VTTSAT
 
 ```
 
+# 시각화 코드 
 * `vis_test_results_allstep.ipynb`
     * 시각화를 위한 코드
-    * `2024_06_10_SKT_Market_Top_AI과정.ipynb`의 xai part의 코드 부분 활용
+    * [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT/tree/main/notebook)의 `2024_06_10_SKT_Market_Top_AI과정.ipynb` 코드 활용하여 작성됨
     
 # 폴더 구조
 ```sh
@@ -35,29 +38,25 @@
 ├── README.md 
 ├── image
 ├── dataset_preprocessing.ipynb # For data preprocessing
-└── src
-    ├── data_provider    # data load, preprocessing, dataloader setting
-    │   ├── dataloader.py
-    │   └── dataset.py
+├── drystrip_dataset     # 웨이퍼 데이터 파일(.parquet), score table 데이터 파일을 위치시켜야 함
+├── data                 # dataset_preprocessing.ipynb를 통해 전처리된 데이터셋 저장됨
+└── src    # 코드 메인 폴더
+    ├── data_provider    # Wafer Dataset 클래스, dataloader 함수
+    │   └── dataset.py  
     ├── layers    # layers for models (attention, embedding, etc.)
     │   ├── Attention.py
     │   ├── Embed.py
     │   └── Transformer_Enc.py
-    ├── models
+    ├── models   
     │   ├── VTTPAT.py
     │   └── VTTSAT.py
     ├── utils    # utils
     │   ├── metrics.py   # metrics for inference
     │   ├── tools.py    # adjust learning rate, visualization, early stopping
     │   └── utils.py    # seed setting, load model, version build, progress bar, check points, log setting
-    ├── scripts    # utils
-    ├── config.yaml    # configure
-    │   ├── run.sh
-    │   └── test.sh
+    ├── config.yaml    # config 세팅에 사용됨
     ├── main.py    # main code
     └── model.py    # model build (build, train, validation,test, inference)
    
-
-5 directories, 18 files
 
 ```
