@@ -20,6 +20,13 @@
 
 # 코드 실행
 - config.yaml을 통해, hyperparameter 설정 가능
+- 아래 코드 실행 시, logs 폴더 안에 아래 파일들 저장됨
+    - `*.pth` : best train loss의 model parameter 파일
+    - `arguments.json`: argument 설정 정보
+    - `model_params.json` : model hyperparameters 정보
+    - `inference_result_with_metadata.h5` : test셋에 대한 웨이퍼 별 메타 데이터 및 **inference 결과**를 함께 저장한 데이터 파일
+        - 이 데이터를 이용하여, `notebook/vis_test_results.ipynb` 코드로 시각화 진행 가능
+
 ```
     # For Training & Inference together
     python main.py --train --test --model VTTSAT
@@ -27,9 +34,14 @@
 ```
 
 # 시각화 코드 
-* `vis_test_results_allstep.ipynb`
-    * 시각화를 위한 코드
-    * [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT/tree/main/notebook)의 `2024_06_10_SKT_Market_Top_AI과정.ipynb` 코드 활용하여 작성됨
+- `vis_test_results.ipynb`
+    - 기능
+        - VTT score 계산 
+        - inference 결과들에 대해서 시계열 plot 시각화
+        - attention difference map 시각화
+    - 코드 실행을 위해, 모델 test test에 대한 inference 결과 데이터 필요(`inference_result_with_metadata.h5`) 
+    - [KBS2024-VTT](https://github.com/hwk0702/KBS2024-VTT/tree/main/notebook)의 `2024_06_10_SKT_Market_Top_AI과정.ipynb` 코드 활용하여 작성됨
+
     
 # 폴더 구조
 ```sh
