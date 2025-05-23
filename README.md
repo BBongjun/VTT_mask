@@ -49,27 +49,27 @@
 ```sh
 
    
-├── drystrip_dataset/           # 웨이퍼 데이터(.parquet), score table(.parquet) 위치
-├── data/                       # 전처리된 데이터 저장 경로
+├── drystrip_dataset/               # 웨이퍼 데이터(.parquet), score table(.parquet) 위치
+├── data/                           # 전처리된 데이터 저장 경로
 ├── notebook/                   
 │   ├── dataset_preprocessing.ipynb # 원본 웨이퍼 데이터 전처리 jupyter notebook
-│   └── vis_test_results.ipynb  # inference 결과를 활용하여 시계열 시각화 및 attetnion difference map 시각화         
-└── src/                        # 메인 코드 디렉토리
-    ├── config.yaml             # 실험 하이퍼파라미터 설정
-    ├── main.py                 # 메인 코드 (train/test 선택 가능)
-    ├── model.py                # 모델 build : train/test/inference 함수 정의
+│   └── vis_test_results.ipynb      # inference 결과를 활용하여 시계열 시각화 및 attetnion difference map 시각화         
+└── src/                            # 메인 코드 디렉토리
+    ├── config.yaml                 # 실험 하이퍼파라미터 설정
+    ├── main.py                     # 메인 코드 (train/test 선택 가능)
+    ├── model.py                    # 모델 build : train/test/inference 함수 정의
     ├── data_provider/
-    │ └── dataset.py            # WaferDataset 정의 및 DataLoader 함수
-    ├── layers/                 # layers for models (attention, embedding, etc.)
-    │ ├── Attention.py          # Variable/Temporal Attention 모듈
-    │ ├── Embed.py              
-    │ └── Transformer_Enc.py    
-    ├── logs/                   # 모델 파라미터, argument 정보, model hyperparameter 정보 등 저장됨
+    │   └── dataset.py              # WaferDataset 정의 및 DataLoader 함수
+    ├── layers/                     # layers for models (attention, embedding, etc.)
+    │   ├── Attention.py            # Variable/Temporal Attention 모듈
+    │   ├── Embed.py              
+    │   └── Transformer_Enc.py    
+    ├── logs/                       # 모델 파라미터, argument 정보, model hyperparameter 정보, vis_test_results.ipynb 그래프 결과 등 저장됨
     ├── models/
-    │ ├── VTTPAT.py             
-    │ └── VTTSAT.py 
+    │   ├── VTTPAT.py             
+    │   └── VTTSAT.py 
     ├── utils/
-    │ ├── metrics.py            # 평가 지표 계산 함수, 현재 프로젝트에서는 사용 X
-    │ ├── tools.py              # 학습에 사용되는 learning rate 스케쥴러, early stopping 등 함수
-    │ └── utils.py              # seed 설정, logging, 체크포인트 저장 등
+    │   ├── metrics.py              # 평가 지표 계산 함수, 현재 프로젝트에서는 사용 X
+    │   ├── tools.py                # 학습에 사용되는 learning rate 스케쥴러, early stopping 등 함수
+    │   └── utils.py                # seed 설정, logging, 체크포인트 저장 등
 ```
